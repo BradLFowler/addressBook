@@ -1,80 +1,34 @@
 let addressBook = [];
 
 window.onload = () => {
-    manyUser()
+    fetchUsers();
 }
-
-const singleUser = () => {
-    fetch('https://randomuser.me/api/')
-    .then(res => res.json())   
-    .then(user => addressBook = user)
-    .then(data => {
-        data.results.map(person => {
-            let myBook = document.getElementById('myBook')
-            let li = document.createElement('li')
-            let text = document.createTextNode(Object.values(person))
-            li.appendChild(text)
-            myBook.append(li)
-        })
-    })
-
-}
-
-const newUser = () => {
-    fetch('https://randomuser.me/api/')
-    .then(res => res.json())
-    .then(user => addressBook = user)
-    .then(data => {
-        data.results.map(person => {
-            let myBook = document.getElementById('myBook')
-            let li = document.createElement('li')
-            let text = document.createTextNode(Object.values(person))
-            li.appendChild(text)
-            myBook.append(li)
-        })
-    })
-
-    fetch('https://randomuser.me/api/')
-    .then(res => res.json())
-    .then(user => addressBook = user)
-    .then(data => {
-        data.results.map(person => {
-            let myBook = document.getElementById('myBook')
-            let li = document.createElement('li')
-            let text = document.createTextNode(Object.values(person))
-            li.appendChild(text)
-            myBook.append(li)
-        })
-    })
-}
-
-const namePicList = () => {
+const fetchUsers = () => {
     fetch('https://randomuser.me/api/?results=20')
-    .then(res => res.json())
-    .then(user => addressBook = user)
-    .then(data => {
-        data.results.map(person => {
-            let myBook = document.getElementById('myBook')
-                let li = document.createElement('li')
-                let text = document.createTextNode(`${Object.values(person.name)}  ${Object.values(person.picture)}`)
-                li.appendChild(text)
-                myBook.append(li)
-        })
+    .then(res => {
+        if(!res.ok) {
+            throw Error("Error")
+        }
+        return res.json()
     })
-
-}
-
-const manyUser = () => {
-    fetch('https://randomuser.me/api/?results=20')
-    .then(res => res.json())
-    .then(user => addressBook = user)
     .then(data => {
-        data.results.map(person => {
-            let myBook = document.getElementById('myBook')
-            let li = document.createElement('li')
-            let text = document.createTextNode(Object.values(person))
-            li.appendChild(text)
-            myBook.append(li)
-        })
+        const displayUsers = data.results.map(person => {
+            addressBook = data.results
+            moreInfo = () => {
+                let elems = document.getElementsByClassName('getInfo')
+                while(elems.length > 0) {
+                    elems[0].classList.remove('getInfo')
+                }
+            }
+            return `<div id="styleDiv">
+            <img src='${person.picture.large}'>
+            <p>First Name: ${person.name.first}</p>
+            <p>Last Name: ${person.name.last}</p>
+            <p id='getInfo' class='getInfo'>Gender: ${person.gender} Age: ${person.dob.age} Location: ${person.location.country}</p> 
+            </div>`
+        }).join('')
+        document.getElementById('contacts').insertAdjacentHTML('afterbegin', displayUsers)
+    }).catch(err => {
+        console.log(err)
     })
 }

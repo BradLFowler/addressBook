@@ -1,9 +1,9 @@
 # addressBook
 Fetch a single user
 Get a new user and add it to an array
-List out users by name and picture
 Fetch multiple users in one request
 Fetch multiple users on window load
+List out users by name and picture
 Add a button to each user that displays there info
 Figure out functionality first then add it to the DOM
 Lastly style it!!!
