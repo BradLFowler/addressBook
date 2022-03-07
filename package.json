@@ -1,0 +1,25 @@
+{
+  "name": "addressbook",
+  "version": "1.0.0",
+  "description": "Fetch a single user\r Get a new user and add it to an array\r Fetch multiple users in one request\r Fetch multiple users on window load\r List out users by name and picture\r Add a button to each user that displays there info\r Figure out functionality first then add it to the DOM\r Lastly style it!!!",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BradLFowler/addressBook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BradLFowler/addressBook/issues"
+  },
+  "homepage": "https://github.com/BradLFowler/addressBook#readme",
+  "devDependencies": {
+    "mocha": "^9.2.1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.1"
+  }
+}
